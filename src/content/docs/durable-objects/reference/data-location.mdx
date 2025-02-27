@@ -72,7 +72,9 @@ let durableObjectStub = OBJECT_NAMESPACE.get(id, { locationHint: "enam" });
 ```
 
 :::caution
-If the location hint cannot be respected when creating a Durable Object, the Durable Object creation will fail. 
+If the location hint cannot be respected when creating a Durable Object, the Durable Object creation will fail.
+
+This is a [retryable](/durable-objects/best-practices/error-handling/) error. If this happens, retry the operation.
 :::
 
 ### Supported locations
