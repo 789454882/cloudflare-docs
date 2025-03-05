@@ -1,0 +1,85 @@
+---
+updated: 2025-03-04
+difficulty: Beginner
+content_type: Tutorial
+pcx_content_type: tutorial
+title: Test D1 read replication
+products:
+  - D1
+languages:
+  - JavaScript
+  - TypeScript
+  - SQL
+---
+
+import { Render, Steps, Tabs, TabItem, FileTree } from "~/components";
+
+In this tutorial, you will create a basic Worker script to test the effect of [D1 read replication](/d1/concepts/read-replication/), and see the difference in the request latency.
+
+## Prerequisites
+
+This tutorial assumes you have completed and understood the [D1 get started](/d1/get-started/) tutorial.
+
+## 1. Create a Worker
+
+Create a new Worker as the means to query your database.
+
+```sh
+npm create cloudflare@latest -- <DATABASE_NAME>
+```
+
+## 2. Create a database located far away
+
+Create a database located far away by specifying a [location hint](/d1/configuration-data-location/) which is far away from the region you are located in.
+
+```sh
+npx wrangler d1 create <DATABASE_NAME> --location=apac
+```
+```sh output
+✅ Successfully created DB '<DATABASE_NAME>' in region APAC
+Created your new D1 database.
+
+{
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "<DATABASE_NAME>",
+      "database_id": "<DATABASE_ID>"
+    }
+  ]
+}
+```
+
+This creates a new D1 database and outputs the [binding](/workers/runtime-apis/bindings/) configuration needed in the next step.
+
+## 3. Bind your D1 database to your Worker
+
+Modify your `wrangler.jsonc` file to include the output of the CLI to bind your D1 database to your Worker.
+
+## 4. Populate the D1 database
+
+Populate your database with the table from the [D1 get started](/d1/get-started/) tutorial.
+
+<Steps>
+1. Copy the following code and save it as a `schema.sql` file in the Worker directory you created in step 1:
+
+    ```sql
+    DROP TABLE IF EXISTS Customers;
+    CREATE TABLE IF NOT EXISTS Customers (CustomerId INTEGER PRIMARY KEY, CompanyName TEXT, ContactName TEXT);
+    INSERT INTO Customers (CustomerID, CompanyName, ContactName) VALUES (1, 'Alfreds Futterkiste', 'Maria Anders'), (4, 'Around the Horn', 'Thomas Hardy'), (11, 'Bs Beverages', 'Victoria Ashworth'), (13, 'Bs Beverages', 'Random Name');
+    ```
+2. Initialize your database to run remotely.
+
+  ```sh
+  npx wrangler d1 execute <DATABASE_NAME> --remote --file=./schema.sql
+	```
+</Steps>
+
+## 5. Write a Worker file which queries the table
+
+Write a Worker file which queries the table and outputs both the results with the query latency.
+
+```js
+// TBC
+```
+
