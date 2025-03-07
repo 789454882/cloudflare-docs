@@ -18,7 +18,7 @@ import {
 
 The Cloudflare Vite plugin (`@cloudflare/vite-plugin`) integrates your Worker code directly with [Vite](https://vite.dev/). Like `wrangler dev`, this approach uses `workerd` under the hood as well, and provides:
 
-- Direct access to Workers [runtime APIs](/workers/runtime-apis/) and [bindings](/runtime-apis/bindings/)
+- Direct access to Workers [runtime APIs](/workers/runtime-apis/) and [bindings](/workers/runtime-apis/bindings/)
 - [Hot module replacement (HMR)](https://vite.dev/guide/features.html#hot-module-replacement) for near-instant feedback on code changes.
 - A single workflow (`vite dev`, `vite build`, `vite preview`) that handles both your client-side assets and Worker code.
 - An “input” Wrangler config file and an automatically generated “output” config file (used for preview and deployment).
@@ -214,7 +214,7 @@ vite build --mode staging
 
 ## Secrets in local development
 
-Secrets can be provided to your Worker in local development using a [`.dev.vars`](/workers/configuration/secrets/#local-development-with-secrets) file. If you are using [Cloudflare Environments](../cloudflare-environments) then the relevant `.dev.vars` file will be selected.
+Secrets can be provided to your Worker in local development using a [`.dev.vars`](/workers/configuration/secrets/#local-development-with-secrets) file. If you are using [Cloudflare Environments](#cloudflare-environments) then the relevant `.dev.vars` file will be selected.
 
 For example,
 
@@ -230,7 +230,7 @@ When you run `vite build`, the relevant `.dev.vars[.env-name]` file is copied to
 
 ## Migrating from `wrangler dev`
 
-Migrating from `wrangler dev` is a simple process and you can follow the instructions in [Get started](../get-started/).
+Migrating from `wrangler dev` is a simple process and you can follow the instructions in [Get started](#get-started).
 
 There are a few key differences to highlight:
 
