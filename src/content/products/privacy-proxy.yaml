@@ -1,0 +1,37 @@
+---
+name: Privacy Proxy
+
+product:
+  title: Privacy Proxy
+  url: /privacy-proxy/
+  group:
+  additional_groups:
+  tags:
+
+meta:
+  title: Privacy Proxy
+  description:
+  author: '@cloudflare'
+
+resources:
+    community:
+    dashboard_link:
+    discord: https://discord.gg/cloudflaredev
+
+externals:
+  - title: Cloudflare homepage
+    url: https://cloudflare.com
+
+algolia:
+  index:
+  apikey:
+  product: privacy-proxy
+---
+## Environments
+
+
+### Proxy authentication
+
+
+
+## Example client code

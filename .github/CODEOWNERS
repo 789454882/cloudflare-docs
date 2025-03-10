@@ -181,6 +181,7 @@
 
 /src/content/docs/key-transparency/ @cloudflare/privacy @cloudflare/pcx-technical-writing
 /src/content/docs/privacy-gateway/ @cloudflare/privacy @cloudflare/pcx-technical-writing
+/src/content/docs/privacy-proxy/ @cloudflare/privacy @cloudflare/pcx-technical-writing
 
 # Radar
 
