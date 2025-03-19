@@ -224,7 +224,7 @@ For example,
 CLOUDFLARE_ENV=staging vite dev
 ```
 
-Will load `.dev.vars.staging` if it exists (falling back to `.dev.vars` if otherwise).
+Will load `.dev.vars.staging` if it exists and otherwise fall back to `.dev.vars`.
 
 :::note
 When you run `vite build`, the relevant `.dev.vars[.env-name]` file is copied to the output directory for use during `vite preview`. It is **not** deployed with your Worker.
