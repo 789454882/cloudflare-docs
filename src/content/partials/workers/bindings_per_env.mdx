@@ -2,11 +2,9 @@
 {}
 ---
 
-## Supported bindings in local and remote dev
+**Local Development:** Includes [`wrangler dev`](/workers/wrangler/commands/#dev) (without the `--remote` flag) and the [Cloudflare Vite plugin](/workers/vite-plugin/). This mode simulates the Cloudflare Workers environment locally.
 
-- **Local Development:** Includes [`wrangler dev`](/workers/wrangler/commands/#dev) (without the `--remote` flag) and the [Cloudflare Vite plugin](/workers/local-development/vite/). This mode simulates the Cloudflare Workers environment locally.
-
-- **Remote Development:** Uses [`wrangler dev --remote`](/workers/wrangler/commands/#dev)), deploying your code to Cloudflare’s infrastructure during development. This ensures all bindings and resources match production conditions. There is no Vite plugin equivalent for testing remote resources.
+**Remote Development:** Uses [`wrangler dev --remote`](/workers/wrangler/commands/#dev)), deploying your code to Cloudflare’s infrastructure during development. This ensures all bindings and resources match production conditions. There is **no Vite plugin equivalent** for testing remote resources.
 
 | Binding                                 | Local (Wrangler & Vite) | Remote (Wrangler only) |
 | --------------------------------------- | :---------------------: | :--------------------: |

@@ -2,40 +2,77 @@
 pcx_content_type: navigation
 title: Local development
 sidebar:
-  order: 5
+  order: 6
 head: []
 description: Develop your Workers locally.
 ---
+
+import { Details, LinkCard, Render, PackageManagers } from "~/components";
 
 When building projects on Cloudflare Workers, you have two options for local development:
 
 - [**Wrangler**](/workers/wrangler/), using the built-in [`wrangler dev`](/workers/wrangler/commands/#dev) command.
 - [Vite](https://vite.dev/), using the [**Cloudflare Vite plugin**](/workers/vite-plugin/).
 
-Both Wrangler and the Vite plugin use [Miniflare](/workers/testing/miniflare/) to provide an accurate **local** simulation of the Cloudflare Workers runtime, ([`workerd`](https://github.com/cloudflare/workerd)). If you need to develop with **remote resources**, Wrangler is the only option that provides remote development with the `wrangler dev --remote` command.
+Both Wrangler and the Vite plugin use [Miniflare](/workers/testing/miniflare/) to provide an accurate **local** simulation of the Cloudflare Workers runtime, ([`workerd`](https://github.com/cloudflare/workerd)). If you need to [develop with **remote resources**](/workers/local-development/remote-data/), Wrangler is the only option that provides remote development with the `wrangler dev --remote` command.
 
-## Choosing Between Wrangler and Vite
+<LinkCard
+	title="Choosing between Wrangler and Vite"
+	href="/workers/local-development/wrangler-vs-vite/"
+/>
 
-Deciding between Wrangler and the Cloudflare Vite plugin depends on your project's focus and development workflow. Here are some quick guidelines to help you choose:
+## Install and start your development server
 
-### When to use Wrangler
+### Wrangler
 
-- **Backend & Workers-focused:**
-  If you're primarily building APIs, serverless functions, or background tasks, use Wrangler.
+#### Installation
 
-- **Remote development:**
-  If your project needs the ability to develop and test using production resources and data on Cloudflare's network, use Wrangler's `--remote` flag.
+To install [Wrangler](https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler), ensure you have [Node.js](https://nodejs.org/en/) and [npm](https://docs.npmjs.com/getting-started) installed, preferably using a Node version manager like [Volta](https://volta.sh/) or [nvm](https://github.com/nvm-sh/nvm).
 
-- **Simple frontends:**
-  If you have minimal frontend requirements and don’t need hot reloading or advanced bundling, Wrangler can meet your needs.
+<Render file="install_wrangler" />
 
-### When to use the Cloudflare Vite Plugin
+#### Start a development server
 
-- **Frontend-centric development:**
-  If you rely on modern frameworks like React, Vue, Svelte, or Solid, the Vite plugin simplifies setup and integration.
+To start a development server using Wrangler, run the following:
 
-- **Rapid iteration (HMR):**
-  If you need near-instant updates in the browser, the Vite plugin provides [Hot Module Replacement (HMR)](https://vite.dev/guide/features.html#hot-module-replacement) during local development.
+<PackageManagers type="exec" pkg="wrangler" args="dev" />
 
-- **Advanced optimizations:**
-  If you require more advanced optimizations (code splitting, efficient bundling, CSS handling, etc), Vite is a strong fit.
+<LinkCard title="Learn more about Wrangler" href="/workers/wrangler/" />
+
+### Vite Plugin
+
+#### Installation
+
+To install the Cloudflare Vite plugin, first start with a simple `package.json`
+
+```json title="package.json"
+{
+	"name": "cloudflare-vite-get-started",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "npm run build && vite preview",
+		"deploy": "npm run build && wrangler deploy"
+	}
+}
+```
+
+Then, install the necessary development depenencies:
+
+<PackageManagers type="add" pkg="vite @cloudflare/vite-plugin wrangler" dev />
+
+This command will install `vite`, along with `@cloudflare/vite-plugin` and `wrangler` as `devDependencies` in your `package.json`.
+
+#### Start a development server
+
+You can then start a development server by running:
+
+<PackageManagers type="run" args="dev" />
+
+<LinkCard
+	title="Learn more about the Vite plugin"
+	href="/workers/vite-plugin/"
+/>
