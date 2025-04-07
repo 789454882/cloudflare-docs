@@ -14,7 +14,7 @@ When building projects on Cloudflare Workers, you have two options for local dev
 - [**Wrangler**](/workers/wrangler/), using the built-in [`wrangler dev`](/workers/wrangler/commands/#dev) command.
 - [Vite](https://vite.dev/), using the [**Cloudflare Vite plugin**](/workers/vite-plugin/).
 
-Both Wrangler and the Vite plugin use [Miniflare](/workers/testing/miniflare/) to provide an accurate **local** simulation of the Cloudflare Workers runtime, ([`workerd`](https://github.com/cloudflare/workerd)). If you need to [develop with **remote resources**](/workers/local-development/remote-data/), Wrangler is the only option that provides remote development with the `wrangler dev --remote` command.
+Both Wrangler and the Vite plugin use [Miniflare](/workers/testing/miniflare/) to provide an accurate **local** simulation of the Cloudflare Workers runtime, ([`workerd`](https://github.com/cloudflare/workerd)). If you need to [develop with **remote resources**](/workers/local-development/remote-data/), Wrangler is the only option, and provides remote development via the `wrangler dev --remote` command.
 
 <LinkCard
 	title="Choosing between Wrangler and Vite"
