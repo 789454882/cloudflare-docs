@@ -15,11 +15,12 @@ import npmAgentsAnimated from "~/assets/images/agents/npm-i-agents.apng"
 
 #### `agents-sdk` -> `agents` <Badge text="Updated" variant="tip" size="small" />
 
-📝 **We've renamed the Agents package to `agents`**!
+📝 **We've renamed the Agents package to `agents`**
 
 If you've already been building with the Agents SDK, you can update your dependencies to use the new package name, and replace references to `agents-sdk` with `agents`:
 
 ```sh
+
 # Install the new package
 npm i agents
 ```
@@ -44,7 +45,7 @@ We've added a number of big new features to the Agents SDK over the past few wee
 - You can now set `cors: true` when using `routeAgentRequest` to return permissive default CORS headers to Agent responses.
 - The regular client now syncs state on the agent (just like the React version).
 - `useAgentChat` bug fixes for passing headers/credentials, including properly clearing cache on unmount.
-- Experimental `/schedule` module with a prompt/schema for adding scheduling to your app (with evals!).
+- Experimental `/schedule` module with a prompt/schema for adding scheduling to your app (with evals).
 - Changed the internal `zod` schema to be compatible with the limitations of Google's Gemini models by removing the discriminated union, allowing you to use Gemini models with the scheduling API.
 
 We've also fixed a number of bugs with state synchronization and the React hooks.
@@ -94,7 +95,7 @@ const { call } = useAgent({ agent: "rpc" });
 const fetchUserHistory = async () => {
     try {
         setLoading(true);
-        // Call methods directly on the Agent!
+        // Call methods directly on the Agent
         const result = await call("getHistory");
         addToast(`RPC result: ${result}`, "success");
     } catch (error) {
@@ -109,11 +110,12 @@ const fetchUserHistory = async () => {
 
 #### agents-starter <Badge text="Updated" variant="tip" size="small" />
 
-We've fixed a number of small bugs in the [`agents-starter`](https://github.com/cloudflare/agents-starter) project — a real-time, chat-based example application with tool-calling & human-in-the-loop built using the Agents SDK. The starter has also been upgraded to use the latest [wrangler v4](/changelog/2025-03-13-wrangler-v4/) release.
+We've fixed a number of small bugs in the [`agents-starter`](https://github.com/cloudflare/agents-starter) project — a real-time, chat-based example application with tool-calling & human-in-the-loop built using the Agents SDK. The starter has also been upgraded to use the latest [Wrangler v4](/changelog/2025-03-13-wrangler-v4/) release.
 
 If you're new to Agents, you can install and run the `agents-starter` project in two commands:
 
 ```sh
+
 # Install it
 $ npm create cloudflare@latest agents-starter -- --template="cloudflare/agents-starter"
 # Run it
