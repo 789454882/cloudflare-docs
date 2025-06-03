@@ -30,7 +30,7 @@ To deploy a pre-existing static site project, start with a pre-generated site. W
 
    This command adds/update the following files:
 
-   - `wrangler.json`: The file containing project configuration.
+   - `wrangler.jsonc`: The file containing project configuration.
    - `package.json`: Wrangler `devDependencies` are added.
    - `tsconfig.json`: Added if not already there to support writing the Worker in TypeScript.
    - `src/index.ts`: A basic Cloudflare Worker, written in TypeScript.
@@ -94,6 +94,12 @@ export default {
 ```
 
 </TabItem> <TabItem label="Service Worker" icon="seti:javascript">
+
+:::caution[Service Workers are deprecated]
+
+Service Workers are deprecated, but still supported. We recommend using [Module Workers](/workers/reference/migrate-to-module-workers/) instead. New features may not be supported for Service Workers.
+
+:::
 
 ```js
 import { getAssetFromKV } from "@cloudflare/kv-asset-handler";

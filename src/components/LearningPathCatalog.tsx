@@ -42,6 +42,7 @@ const LearningPathCatalog = ({
 			description: lp.description,
 			products: lp.products,
 			groups,
+			video: lp.video,
 		};
 	});
 
@@ -68,13 +69,13 @@ const LearningPathCatalog = ({
 	return (
 		<div className="md:flex">
 			<div className="mr-8 w-full md:w-1/4">
-				<div className="!mb-8 hidden md:block">
-					<span className="text-sm font-bold uppercase text-gray-600 dark:text-gray-200">
+				<div className="mb-8! hidden md:block">
+					<span className="text-sm font-bold text-gray-600 uppercase dark:text-gray-200">
 						Product groups
 					</span>
 
 					{groups.map((group) => (
-						<label key={group} className="!my-2 block">
+						<label key={group} className="my-2! block">
 							<input
 								type="checkbox"
 								className="mr-2"
@@ -101,13 +102,13 @@ const LearningPathCatalog = ({
 					))}
 				</div>
 
-				<div className="!mb-8 hidden md:block">
-					<span className="text-sm font-bold uppercase text-gray-600 dark:text-gray-200">
+				<div className="mb-8! hidden md:block">
+					<span className="text-sm font-bold text-gray-600 uppercase dark:text-gray-200">
 						Products
 					</span>
 
 					{products.map((product) => (
-						<label key={product} className="!my-2 block">
+						<label key={product} className="my-2! block">
 							<input
 								type="checkbox"
 								className="mr-2"
@@ -135,10 +136,10 @@ const LearningPathCatalog = ({
 				</div>
 			</div>
 
-			<div className="!mt-0 grid w-full grid-cols-1 items-stretch gap-2 self-start lg:w-3/4 lg:grid-cols-2 lg:gap-4">
+			<div className="mt-0! grid w-full grid-cols-1 items-stretch gap-2 self-start lg:w-3/4 lg:grid-cols-2 lg:gap-4">
 				{filtered.length === 0 && (
-					<div className="flex w-full flex-col justify-center rounded-md border bg-gray-50 py-6 text-center align-middle dark:border-gray-500 dark:bg-gray-800 md:col-span-2 lg:col-span-3">
-						<span className="text-lg !font-bold">No products found</span>
+					<div className="flex w-full flex-col justify-center rounded-md border bg-gray-50 py-6 text-center align-middle md:col-span-2 lg:col-span-3 dark:border-gray-500 dark:bg-gray-800">
+						<span className="text-lg font-bold!">No products found</span>
 						<p>
 							Try a different search term, or broaden your search by removing
 							filters.
@@ -150,26 +151,27 @@ const LearningPathCatalog = ({
 						<a
 							key={path.title}
 							href={path.link}
-							className="rounded-md border border-solid border-gray-200 p-6 !text-inherit no-underline hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
+							className="rounded-md border border-solid border-gray-200 p-6 text-inherit! no-underline hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
 						>
-							{path.icon && (
-								<div className="w-fit rounded-full bg-orange-50 p-1 text-orange-500 dark:bg-orange-950">
-									<svg
-										{...path.icon.attributes}
-										width={24}
-										height={24}
-										dangerouslySetInnerHTML={{ __html: path.icon.body }}
-									/>
-								</div>
-							)}
-							<p className="!mt-3 font-semibold">{path.title}</p>
-							<Markdown
-								className="!mt-1 text-sm leading-6"
-								disallowedElements={["a"]}
-								unwrapDisallowed={true}
-							>
-								{path.description}
-							</Markdown>
+							<div className="flex gap-2">
+								{path.icon && (
+									<div className="w-fit rounded-full bg-orange-50 p-1 text-orange-500 dark:bg-orange-950">
+										<svg
+											{...path.icon.attributes}
+											width={24}
+											height={24}
+											dangerouslySetInnerHTML={{ __html: path.icon.body }}
+										/>
+									</div>
+								)}
+								{path.video && <span className="sl-badge tip">Video</span>}
+							</div>
+							<p className="mt-3! font-semibold">{path.title}</p>
+							<div className="mt-1! text-sm">
+								<Markdown disallowedElements={["a"]} unwrapDisallowed={true}>
+									{path.description}
+								</Markdown>
+							</div>
 						</a>
 					);
 				})}

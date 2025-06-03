@@ -77,7 +77,7 @@ To disable Preview URLs for a Worker:
 4. On "Preview URLs" click "Disable".
 5. Confirm you want to disable.
 
-### Disabling Preview URLs in the `wrangler.toml / wrangler.json` file
+### Disabling Preview URLs in the [Wrangler configuration file](/workers/wrangler/configuration/)
 
 :::note
 Wrangler 3.91.0 or higher is required to use this feature.
@@ -105,3 +105,4 @@ If you disable Preview URLs in the Cloudflare dashboard but do not update your W
 - Preview URLs are not generated for Workers that implement a [Durable Object](/durable-objects/).
 - Preview URLs are not currently generated for [Workers for Platforms](/cloudflare-for-platforms/workers-for-platforms/) [user Workers](/cloudflare-for-platforms/workers-for-platforms/reference/how-workers-for-platforms-works/#user-workers). This is a temporary limitation, we are working to remove it.
 - You cannot currently configure Preview URLs to run on a subdomain other than [`workers.dev`](/workers/configuration/routing/workers-dev/).
+- You cannot view logs for Preview URLs today, this includes Workers Logs, Wrangler tail and Logpush.
