@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - production
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}

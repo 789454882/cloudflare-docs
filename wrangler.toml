@@ -1,6 +1,6 @@
 #:schema ./node_modules/wrangler/config-schema.json
-name = "cloudflare-docs"
-account_id = "b54f07a6c269ecca2fa60f1ae4920c99"
+name = "cloudflare-docs-private"
+account_id = "2f3dc21d188ba781322b520bbde5fb5a"
 compatibility_date = "2025-06-02"
 compatibility_flags = ["nodejs_compat"]
 main = "./worker/index.ts"
@@ -17,7 +17,3 @@ directory = "./dist"
 binding = "ASSETS"
 not_found_handling = "404-page"
 run_worker_first = true
-
-[[r2_buckets]]
-binding = "VENDORED_MARKDOWN"
-bucket_name = "vendored-markdown"
