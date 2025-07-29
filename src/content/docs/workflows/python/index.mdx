@@ -1,5 +1,5 @@
 ---
-title: Python SDK
+title: Python Workflows SDK
 pcx_content_type: navigation
 sidebar:
   order: 5
@@ -13,20 +13,20 @@ Refer to [Python Workers](/workers/languages/python) for more information about 
 
 :::caution[Python Workflows are in beta, as well as the underlying platform.]
 
-You must add the `python_workflows` compatibility flag to your `wrangler.toml` file, as well as `python_workers`.
+You must add both `python_workflows` and `python_workers` compatibility flags to your `wrangler.toml` file.
 
-Join the #python-workflows channel in the [Cloudflare Developers Discord](https://discord.cloudflare.com/) and let us know what you'd like to see next.
+Join the #python-workers channel in the [Cloudflare Developers Discord](https://discord.cloudflare.com/) and let us know what you'd like to see next.
 :::
 
 ## Get Started
 
-Similarly to Typescript, the main entrypoint for a Python workflow is the [`WorkflowEntrypoint`](/workflows/build/workers-api/#workflowentrypoint) class. Your workflow logic should exist inside the [`run`](/workflows/build/workers-api/#run) handler. In a Python workflow, this handler is named `on_run`.
+The main entrypoint for a Python workflow is the [`WorkflowEntrypoint`](/workflows/build/workers-api/#workflowentrypoint) class. Your workflow logic should exist inside the [`run`](/workflows/build/workers-api/#run) handler.
 
 ```python
 from workers import WorkflowEntrypoint
 
 class MyWorkflow(WorkflowEntrypoint):
-    def on_run(self, event, step):
+    async def run(self, event, step):
         # steps here
 ```
 
