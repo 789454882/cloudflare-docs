@@ -34,52 +34,7 @@ Review the WARP client’s architecture, installation paths, and modes to help y
 
 ### WARP installation details
 
-The GUI and daemon (or service) have different names and are stored in the following locations:
-
-<details>
-<summary>Windows</summary>
-
-|                      | Windows                                                                                                                                                                                                          |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Service / Daemon** | `C:\Program Files\Cloudflare\Cloudflare WARP\warp-svc.exe`                                                                                                                                                       |
-| **GUI application**  | `C:\Program Files\Cloudflare\Cloudflare WARP\Cloudflare WARP.exe`                                                                                                                                                |
-| **Logs Location**    | <details><summary>Daemon</summary><br/>`C:\ProgramData\Cloudflare\`</details><br/><details><summary>GUI Logs</summary><br/>`C:\Users\<USER>.WARP\AppData\Local`<br/>or<br/>`%LOCALAPPDATA%\Cloudflare`</details> |
-
-</details>
-
-<details>
-<summary>macOS</summary>
-
-|                      | macOS                                                                                                                                                                           |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Service / Daemon** | `/Applications/Cloudflare WARP.app/Contents/Resources/CloudflareWARP`                                                                                                           |
-| **GUI application**  | `/Applications/Cloudflare WARP.app/Contents/MacOS/Cloudflare WARP`                                                                                                              |
-| **Logs Location**    | <details><summary>Daemon</summary><br/>`/Library/Application Support/Cloudflare/`</details><br/><details><summary>GUI Logs</summary><br/>`~/Library/Logs/Cloudflare/`</details> |
-
-</details>
-
-<details>
-<summary>Linux</summary>
-
-|                      | Linux                                                      |
-| -------------------- | ---------------------------------------------------------- |
-| **Service / Daemon** | `/bin/warp-svc`                                            |
-| **GUI application**  | `/bin/warp-taskbar`                                        |
-| **Logs Location**    | `/var/log/cloudflare-warp/`<br/>`/var/lib/cloudflare-warp` |
-
-</details>
-
-Along with the WARP GUI and daemon, `warp-cli` and `warp-diag` are also [installed](/cloudflare-one/connections/connect-devices/warp/download-warp/) on the machine and added to the system path for use from any terminal session.
-
-[`warp-diag`](/cloudflare-one/connections/connect-devices/warp/troubleshooting/warp-logs/) is a command-line diagnostics tool that collects logs, configuration details, and connectivity data from the WARP client to help troubleshoot issues.
-
-`warp-cli` is the command-line interface (CLI) for managing and configuring the Cloudflare WARP client, allowing users to connect, disconnect, and adjust settings programmatically.
-
-:::tip
-
-Run `warp-cli help` and `warp-diag help` in your terminal to review the available subcommands and options.
-
-:::
+<Render file="warp/warp-installation-details" />
 
 ### WARP modes
 
