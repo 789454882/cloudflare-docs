@@ -9,17 +9,17 @@ import { MetaInfo, Render, Steps, Stream, Tabs, TabItem, Type } from "~/componen
 
 This guide helps you diagnose and resolve common issues with the Cloudflare WARP client. It covers how to troubleshoot the WARP client on desktop operating systems, including Windows, macOS, and Linux.
 
-1. **Before you start**: [Prerequisites](#prequisites), permissions, [version control](#check-your-warp-version) and WARP basics.
+1. **Before you start**: [Prerequisites](#prerequisites), permissions, [version control](#check-your-warp-version) and WARP basics.
 2. **Collect logs**: Through the [dashboard]() (with DEX remote capture) or the [command-line interface](#option-b-collect-logs-via-the-cli) (CLI) (`warp-diag`).
 3. **Review logs**: [Status](#check-warp-status), [settings](#check-warp-settings), [profile ID](#profile-id), [split tunnel](#exclude-mode-with-hostsips) configuration, and other settings.
-4. **Fix common misconfigurations**: [Profile mismatch](#wrong-profile-id), [split tunnel issues](#wrong-split-tunnel-configuration), [managed network issues](#review-your-managed-network-settings).
+4. **Fix common misconfigurations**: [Profile mismatch](#wrong-profile-id), [split tunnel issues](#wrong-split-tunnel-configuration), [managed network issues](#review-your-managed-network-settings), [user group mismatch](#check-a-users-group-membership).
 5. **File a support ticket**: [How to file a ticket](#file-a-support-ticket) after you have exhausted your troubleshooting options.
 
 ## 1. Before you start
 
-### Prequisites
+### Prerequisites
 
-- You must have completed the [Zero Trust onboarding flow](/cloudflare-one/setup/) with a Zero Trust organizaton created.
+- You must have completed the [Zero Trust onboarding flow](/cloudflare-one/setup/) with a Zero Trust organization created.
 - You must have the WARP client installed on an end user device.
 - You must have a [role](/cloudflare-one/roles-permissions/) that gives admin permission to download logs on the Cloudflare dashboard.
 
@@ -169,14 +169,14 @@ After you have downloaded the WARP diagnostic logs, open the `warp-settings.txt`
 ```txt
 Merged configuration:
 (derived)   Always On: true
-(network policy)    Switch Locked: false # If false, does not allows the user to turn off the WARP toggle and disconnect the WARP client
+(network policy)    Switch Locked: false # If false, does not allow the user to turn off the WARP toggle and disconnect the WARP client
 (network policy)    Mode: WarpWithDnsOverHttps # The device's WARP mode, this mode is WARP with Gateway mode
 (network policy)    WARP tunnel protocol: WireGuard
 (default)   Disabled for Wifi: false
 (default)   Disabled for Ethernet: false
-(reg defaults)  Resolve via: 1xx0x1011xx000000000f0x00000x11.cloudflare-gateway.com @ [1xx.1xx.1x.1, 1x01:1x00:1x00::1xx1] # The SNI Cloudflare will use and the IP address for DNS-over-HTTP (DoH) requests
+(reg defaults)  Resolve via: 1xx0x1011xx000000000f0x00000x11.cloudflare-gateway.com @ [1xx.1xx.1x.1, 1x01:1x00:1x00::1xx1] # The SNI Cloudflare will use and the IP address for DNS-over-HTTPSs (DoH) requests
 (user set)  qlog logging: Enabled
-(default)   Onboarding: true # If true, the user sees a onboarding prompt when they first install the WARP client
+(default)   Onboarding: true # If true, the user sees an onboarding prompt when they first install the WARP client
 (network policy)    Exclude mode, with hosts/ips: # Split tunnel configuration
   1xx.1xx.1xx.1xx/25 (zoom)
 ...
@@ -254,7 +254,7 @@ Exclude mode, with hosts/ips:
 
 ##### Fallback domains
 
-Refers to your [Local Domain Fallback](/cloudflare-one/connections/connect-devices/warp/configure-warp/route-traffic/local-domains/) settings. In the example file, WARP lists `intranet` as a domain that will not be sent to Gateway for proccessing and will instead be sent directly to the configured fallback servers.
+Refers to your [Local Domain Fallback](/cloudflare-one/connections/connect-devices/warp/configure-warp/route-traffic/local-domains/) settings. In the example file, WARP lists `intranet` as a domain that will not be sent to Gateway for processing and will instead be sent directly to the configured fallback servers.
 
 ```txt
 (network policy)    Fallback domains:
@@ -313,13 +313,19 @@ To verify that WARP is configured and working properly, review the following:
 
 A profile ID is a unique identifier assigned to each [device profile]((/cloudflare-one/connections/connect-devices/warp/configure-warp/device-profiles/)) in the Zero Trust dashboard, used to determine which configuration settings apply to a device.
 
-If your organization has multiple device profiles defined in the Zero Trust dashboard, a device may be matched to an unexpected profile due to lack of precise matcing rules or how profile precedence is configured.
+If your organization has multiple device profiles defined in the Zero Trust dashboard, a device may be matched to an unexpected profile because:
 
-:::note[WARP evaluates profile IDs according to chronological order in the dashboard]
+1. How profile precedence is configured.
+
+:::note[WARP evaluates profile IDs in the order they appear in the dashboard]
 
 <Render file="warp/device-profile-order-of-precedence" />
 
 :::
+
+2. [Managed network](#review-your-managed-network-settings) issues.
+3. User group [mismatch](#check-a-users-group-membership).
+4. Lack of [precise match rules](#edit-your-device-profile-match-rules)
 
 #### Check the applied device profile
 
@@ -350,7 +356,7 @@ A [managed network](/cloudflare-one/connections/connect-devices/warp/configure-w
 
 If the managed network is misconfigured or the TLS endpoint is unreachable, the device may fall back to an unintended profile.
 
-When troubleshooting WARP for managed network isses:
+When troubleshooting WARP for managed network issues:
 
 1. Verify the endpoint is reachable.
 
@@ -370,6 +376,21 @@ When troubleshooting WARP for managed network isses:
 
 	To simplify management and prevent errors, avoid creating multiple managed network profiles for the same location. For example, if you have multiple TLS endpoints in one office, link them all to a single device profile. This reduces the risk of a device matching an unintended profile due to a configuration error.
 
+#### Check a user's group membership
+
+If a user is having issues with a device profile, it may be because they are not part of the correct user group. This can happen when an organization is not using SCIM for automatic identity provider (IdP) updates.
+
+To check that the user belongs to the intended group:
+
+1. Log into [Zero Trust]() > go to **My Team** > **Users**.
+2. Select the user.
+3. Under **User Registry Identity**, select the user's name.
+4. The Get-identity endpoint lists all the groups the user belongs to.
+
+If the user was recently added to a group, they will need to update their group membership with Cloudflare Zero Trust. This can be accomplished by logging into the reauthenticate endpoint.
+
+<Render file="warp/manually-reauth" />
+
 #### Edit your device profile match rules
 
 To modify the match rules of a device profile, you will need to edit the device profile. To edit the device profile:
@@ -386,7 +407,7 @@ For example, if you set your mode to Exclude IPs and domains and accidentally ex
 
 #### 1. Check the applied split tunnel configuration
 
-After downloading the WARP diagnostic logs, review your configuration is working as intended:
+After downloading the WARP diagnostic logs, review that your configuration is working as intended:
 
 1. Open the `warp-settings.txt` file and find `Exclude mode, with hosts/ips:` or `Include mode, with hosts/ips:`.
 
@@ -408,39 +429,31 @@ If your dashboard split tunnel configuration does not match your `warp-settings.
 
 If the split tunnel configuration in `warp-settings.txt` does not match the dashboard, you can force the WARP client to fetch the latest settings.
 
-This can be done by instructing the end user to [toggle WARP off and on](#option-a-toggle-warp-off-and-back-on), [reset their encryption keys](#option-b-reset-the-encryption-keys), or, if you have admin access, [revoking the user session](#option-c-revoke-the-user-session).
+This can be done by instructing the end user to [toggle WARP off and on](#option-a-toggle-warp-off-and-back-on), or [reset their encryption keys](#option-b-reset-the-encryption-keys).
 
-All three methods update the client with the latest configuration.
+Both methods update the client with the latest configuration.
 
 ##### Option A: Toggle WARP off and back on
 
 On the end user device, open the WARP GUI and toggle WARP on and off.
 
+:::tip[What if the end user cannot turn off WARP?]
 If the end user's [WARP switch](/cloudflare-one/connections/connect-devices/warp/configure-warp/warp-settings/#lock-warp-switch) is locked, they will need an [admin override code](/cloudflare-one/connections/connect-devices/warp/configure-warp/warp-settings/#admin-override) to be able to toggle the WARP switch.
+
+[Resetting the encryption keys](#option-b-reset-the-encryption-keys) may be a faster solution.
+:::
 
 After you toggle WARP back on, the WARP client will fetch new settings when it reconnects.
 
 ##### Option B: Reset the encryption keys
 
-To reset the encyrption keys on an end user's desktop:
+To reset the encryption keys on an end user's desktop:
 
 1. Open the WARP GUI.
 2. Select the gear icon.
 3. Select **Preferences** > **Connection** > **Reset encryption keys**.
 
 Resetting the encryption keys forces the WARP client to reestablish its tunnel and retrieve the latest configuration.
-
-##### Option C: Revoke the user session
-
-An administrator can [revoke the user session](/cloudflare-one/identity/users/session-management/#per-user) from the Cloudflare dashboard to force a complete reenrollment.
-
-1. In the Zero Trust dashboard, go to **My Team** > **Users**.
-2. Select the checkbox next to the user's name.
-3. Select **Action** > **Revoke access**.
-
-Revoking access will prompt the user to log back in. The WARP client will then perform a new registration and fetch the latest settings from the dashboard.
-
-To check that the split tunnel settings have been updated, run `warp-cli settings` on the device and review the configuration.
 
 ## 5. File a support ticket
 
