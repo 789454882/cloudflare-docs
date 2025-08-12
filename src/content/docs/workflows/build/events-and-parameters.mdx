@@ -67,7 +67,7 @@ npx wrangler@latest workflows trigger workflows-starter '{"some":"data"}'
 
 A running Workflow can wait for an event (or events) by calling `step.waitForEvent` within the Workflow, which allows you to send events to the Workflow in one of two ways:
 
-1. Via the [Workers API binding](/workflows/build/workers-api/): call `instance.sendEvent` to send events to specific workflow instances.
+1. Via the [Workers API binding](/workflows/build/workflows-api/): call `instance.sendEvent` to send events to specific workflow instances.
 2. Using the REST API (HTTP API)'s [Events endpoint](/api/resources/workflows/subresources/instances/subresources/events/methods/create/).
 
 Because `waitForEvent` is part of the `WorkflowStep` API, you can call it multiple times within a Workflow, and use control flow to conditionally wait for an event.

@@ -1687,6 +1687,7 @@
 # workflows
 
 /workflows/reference/storage-options/ /workers/platform/storage-options/ 301
+/workflows/build/workers-api/ /workflows/build/workflows-api/ 301
 
 
 # workers KV

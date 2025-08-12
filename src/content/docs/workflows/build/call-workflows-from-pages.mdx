@@ -37,7 +37,7 @@ services = [
 
 Your Worker can expose a specific method (or methods) that only other Workers or Pages Functions can call over the Service Binding.
 
-In the following example, we expose a specific `createInstance` method that accepts our `Payload` and returns the [`InstanceStatus`](/workflows/build/workers-api/#instancestatus) from the Workflows API:
+In the following example, we expose a specific `createInstance` method that accepts our `Payload` and returns the [`InstanceStatus`](/workflows/build/workflows-api/#instancestatus) from the Workflows API:
 
 <TypeScriptExample filename="index.ts">
 ```ts
@@ -97,7 +97,7 @@ Service Bindings don't require you to expose a public endpoint from your Worker,
 
 :::
 
-An alternative to setting up a Service Binding is to call the Worker over HTTP by using the Workflows [Workers API](/workflows/build/workers-api/#workflow) to `create` a new Workflow instance for each incoming HTTP call to the Worker:
+An alternative to setting up a Service Binding is to call the Worker over HTTP by using the Workflows [Workers API](/workflows/build/workflows-api/#workflow) to `create` a new Workflow instance for each incoming HTTP call to the Worker:
 
 <TypeScriptExample filename="index.ts">
 ```ts
@@ -137,6 +137,6 @@ You can also choose to authenticate these requests by passing a shared secret in
 
 ### Next steps
 
-* Learn more about how to programatically call and trigger Workflows from the [Workers API](/workflows/build/workers-api/)
+* Learn more about how to programatically call and trigger Workflows from the [Workers API](/workflows/build/workflows-api/)
 * Understand how to send [events and parameters](/workflows/build/events-and-parameters/) when triggering a Workflow
 * Review the [Rules of Workflows](/workflows/build/rules-of-workflows/) and best practices for writing Workflows
