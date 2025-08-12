@@ -24,7 +24,7 @@ const { label } = props.parse(Astro.props);
 		let json;
 		try {
 			json = JSON.parse(raw);
-		} catch (e) {
+		} catch () {
 			localStorage.removeItem("checkboxes");
 			return [];
 		}
