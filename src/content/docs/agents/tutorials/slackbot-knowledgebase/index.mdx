@@ -65,7 +65,7 @@ Based on the Slack events you subscribe to, the Worker will receive events from 
 - `url_verification`: To verify the request is from Slack.
 - `event_callback`: Event callback for the events you subscribe to.
 
-You will need to handle both of these events. The `url_verification` event can be handled by our Worker. This event is used to verify the request is from Slack and doesn't need AI capabilities to be processed by the agent. 
+You will need to handle both of these events. The `url_verification` event can be handled by our Worker. This event is used to verify the request is from Slack and doesn't need AI capabilities to be processed by the agent.
 
 The `event_callback` event will be processed by the agent. This event contains the actual events you subscribed to. It will provide the event data that will be used by the agent to generate responses.
 
@@ -289,7 +289,7 @@ You now have a Slackbot that can answer user's questions. To make sure it uses t
 
 ## Step 4: Create the knowledge base tool
 
-To make sure your users get the best answers, you will need to add the knowledge base tool to the AI model. The KnowledgeBaseTool is a tool that uses AutoRAG to retrieve information. You will need to create and configure a new AutoRAG instance. You can follow the [AutoRAG getting started](/autorag/tutorials/quick-start) to create and configure a new AutoRAG instance.
+To make sure your users get the best answers, you will need to add the knowledge base tool to the AI model. The KnowledgeBaseTool is a tool that uses AutoRAG to retrieve information. You will need to create and configure a new AutoRAG instance. You can follow the [AutoRAG getting started](/autorag/get-started/) to create and configure a new AutoRAG instance.
 
 Once you have created and configured the AutoRAG instance, you will need to create the knowledge base tool. The knowledge base tool will be used to retrieve information from the knowledge base. You will use AI bindings to use AutoRAG. In your `wrangler` configuration file, add the following binding:
 
