@@ -116,21 +116,10 @@ For example, if users are issued a corporate-managed iPhone with limited permiss
 	method="POST"
 	json={{
 		name: "Do not inspect corporate devices",
-		conditions: [
-			{
-				type: "device_posture",
-				expression: {
-					any: {
-						in: {
-							lhs: {
-								splat: "device_posture.checks.passed",
-							},
-						},
-						rhs: ["{serial_number_list_uuid}"],
-					},
-				},
-			},
-		],
+		traffic: "",
+		identity: "",
+		device_posture:
+			'any(device_posture.checks.passed[*] in {"<SERIAL_NUMBER_LIST_UUID>"})',
 		action: "off",
 		precedence: 14002,
 		enabled: true,
@@ -155,22 +144,10 @@ If you filter your network-connected devices with Magic WAN tunnels, the WARP Co
 	method="POST"
 	json={{
 		name: "Do not inspect corporate devices",
+		traffic: "http.conn.internal_src_ip in {203.0.113.0/24}",
+		identity: "",
+		device_posture: "",
 		action: "off",
-		conditions: [
-			{
-				type: "traffic",
-				expression: {
-					in: {
-						lhs: "http.conn.internal_src_ip",
-						rhs: [
-							{
-								cidr: "203.0.113.0/24",
-							},
-						],
-					},
-				},
-			},
-		],
 	}}
 />
 
